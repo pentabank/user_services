@@ -11,11 +11,9 @@ const expressPlayground = require('graphql-playground-middleware-express')
 
 const PORT = process.env.PORT || 3000
 
-
 let app = express()
+
 dotenv.config()
-
-
 app.use(logger)
 
 app.listen(PORT, () => {
