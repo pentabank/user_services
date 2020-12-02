@@ -29,18 +29,4 @@ app.get('/', function (req, res) {
     res.send('hello, world!')
 })
 
-const client = {
-    firstName: "Cheikh G",
-    lastName: "Wane",
-    dateOfBirth: "04/10/1996",
-    CIN: "1896199600180",
-    address: "Derkle",
-    phoneNumber: "221771974257",
-    createdAt: "01/12/2020",
-    isActive: false,
-    age: 24,
-    email: "cheikhgwane@gmail.com",
-}
-
-addClient(client).then(res => console.log(res))
-console.log(connect())
+connect()
