@@ -1,0 +1,53 @@
+type Query {
+  greetings: String
+  allClients: [Client]
+}
+
+type Mutation {
+  addClient(client: ClientCreationInput!): ID!
+  deleteClient(id: ID!): Message!
+  updateClient(client: ClientCreationInput!): Client!
+  login(email: String!, password: String!): AuthPayload
+}
+
+type Message {
+  code: Int!
+  message: String!
+}
+
+type AuthPayload {
+  user: Client
+  token: String
+}
+
+scalar Date
+
+type Client {
+  id: ID
+  firstName: String
+  lastName: String
+  dateOfBirth: Date
+  CIN: String
+  address: String
+  phoneNumber: String
+  createdAt: Date
+  isActive: Boolean
+  age: Int
+  email: String
+}
+
+input ClientCreationInput {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  dateOfBirth: Date!
+  CIN: String!
+  address: String!
+  phoneNumber: String!
+  createdAt: Date!
+  isActive: Boolean!
+  age: Int!
+  email: String!
+  password: String!
+  confirmPassword: String!
+}
