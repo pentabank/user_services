@@ -1,15 +1,19 @@
-import { getConnection } from "../models/db"
 import Client from "../models/Client"
+import mongoose from "mongoose"
 import { getError, Message, } from "../utils/message";
+import { ClientCreationInput } from "../GraphQLTypes/types";
+import { validate } from "../utils/validator";
 
-const db = getConnection()
-
-export async function addClient(client: any): Promise<Message> {
+export async function addClient(client: ClientCreationInput): Promise<Message> {
     let _client = new Client(client);
-    //check if client doesnt exist already
-    Client.findOne({ email: _client.schema.get("email") })
+
     try {
-        let res = await _client.save()
+        validate(client)
+        let objectExist = await Client.findOne({ email: client.email }).exec()
+        if (objectExist) {
+            throw Error("Client already created")
+        }
+        await _client.save()
         return { code: 200, message: "Client inserted" }
     } catch (err) {
         let errors = getError(err)

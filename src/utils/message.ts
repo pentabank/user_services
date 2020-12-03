@@ -5,11 +5,14 @@ export interface Message {
     errors?: String[]
 }
 
-export function getError(err: any) {
+export function getError(error: any) {
     let errors = []
-    if (err.name == 'ValidationError') {
-        for (let field in err.errors) {
-            errors.push(err.errors[field].message);
+    if (error.name == "ClientCreationError") {
+        return error.err
+    }
+    if (error.name == 'ValidationError') {
+        for (let field in error.errors) {
+            errors.push(error.errors[field].message);
         }
     }
     return errors

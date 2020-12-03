@@ -11,7 +11,7 @@ const good_client = {
     createdAt: "01/12/2020",
     isActive: false,
     age: 24,
-    email: "cheikhgwane@gmail.com",
+    email: "cheikhgwae@gmail.com",
     password: "test"
 }
 
@@ -27,13 +27,21 @@ const bad_client = {
     age: 24,
     email: "cheikhgwane@gmail.com",
 }
-/*
-test('Test adding client failed', async () => {
-   return addClient(bad_client).then(res => {
-       expect(res.code).toBe(400)
-   })
-}, 30000) */
 
+const bad_client_2 = {
+    firstName: "Cheikh G",
+    lastName: "Wane",
+    dateOfBirth: "04/10/1996",
+    CIN: "1896199600180",
+    address: "Derkle",
+    phoneNumber: "221771974257",
+    createdAt: "01/12/2020",
+    isActive: false,
+    age: 24,
+    password: "",
+    email: "cheikhgwe@gmail.com",
+    dummy: "dummy"
+}
 
 describe("Client insertion tests", () => {
 
@@ -42,15 +50,25 @@ describe("Client insertion tests", () => {
         let db = getConnection()
         db.close()
     })
-
-    it('Should insert a new client', async () => {
-        let res = await addClient(good_client)
-        expect(res.code).toBe(200)
-    })
-
-    it('Should fail when inserting a new client', async () => {
-        let res = await addClient(bad_client)
-        expect(res.code).toBe(400)
-    })
+    /* 
+        it('Should insert a new client', async () => {
+            let res = await addClient(good_client)
+            expect(res.code).toBe(200)
+        })
+    
+        it('Should fail when inserting a new client', async () => {
+            let res = await addClient(bad_client)
+            expect(res.code).toBe(400)
+        })
+    
+        it("Passing an empty object", async () => {
+            let res = await addClient({})
+            expect(res.code).toBe(400)
+        })
+    
+        it("Passing an object with more attributes", async () => {
+            let res = await addClient(bad_client_2)
+            expect(res.code).toBe(400)
+        }) */
 })
 

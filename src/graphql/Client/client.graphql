@@ -1,6 +1,7 @@
 type Query {
   greetings: String
   allClients: [Client]
+  objectionCreationError: String!
 }
 
 type Mutation {
@@ -37,7 +38,6 @@ type Client {
 }
 
 input ClientCreationInput {
-  id: ID!
   firstName: String!
   lastName: String!
   dateOfBirth: Date!
@@ -48,6 +48,19 @@ input ClientCreationInput {
   isActive: Boolean!
   age: Int!
   email: String!
+  password: String!
+  confirmPassword: String!
+}
+
+input ClientUpdateInput {
+  firstName: String!
+  lastName: String!
+  dateOfBirth: Date!
+  CIN: String!
+  address: String!
+  phoneNumber: String!
+  isActive: Boolean!
+  age: Int!
   password: String!
   confirmPassword: String!
 }

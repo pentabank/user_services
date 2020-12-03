@@ -1,0 +1,7 @@
+{
+    "CLIENT" :{
+        "PASSWORD_FORMAT":"Given password doesn't match the required format! Please check your input.",
+        "CONFIRM":"Password and confirm password didn't match.",
+        "CIN":"CIN format is incorrect. CIN must be 13 long"
+    }
+}

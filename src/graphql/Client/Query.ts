@@ -18,7 +18,8 @@ const CLIENTS = [
 const resolvers = {
     Query: {
         greetings: () => greeting(),
-        allClients: () => CLIENTS
+        allClients: () => CLIENTS,
+        objectionCreationError: (args: any) => objectionCreationError(parent, args)
     }
 }
 
@@ -27,8 +28,8 @@ const greeting = () => {
 }
 
 
-function addClient() {
-
+function objectionCreationError(parent: any, args: any) {
+    throw new Error(args)
 }
 
 export default resolvers

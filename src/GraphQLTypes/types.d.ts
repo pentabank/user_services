@@ -16,6 +16,7 @@ export type Query = {
   __typename?: 'Query';
   greetings?: Maybe<Scalars['String']>;
   allClients?: Maybe<Array<Maybe<Client>>>;
+  objectionCreationError: Scalars['String'];
 };
 
 export type Mutation = {
@@ -76,7 +77,6 @@ export type Client = {
 };
 
 export type ClientCreationInput = {
-  id: Scalars['ID'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   dateOfBirth: Scalars['Date'];
@@ -87,6 +87,19 @@ export type ClientCreationInput = {
   isActive: Scalars['Boolean'];
   age: Scalars['Int'];
   email: Scalars['String'];
+  password: Scalars['String'];
+  confirmPassword: Scalars['String'];
+};
+
+export type ClientUpdateInput = {
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  dateOfBirth: Scalars['Date'];
+  CIN: Scalars['String'];
+  address: Scalars['String'];
+  phoneNumber: Scalars['String'];
+  isActive: Scalars['Boolean'];
+  age: Scalars['Int'];
   password: Scalars['String'];
   confirmPassword: Scalars['String'];
 };
