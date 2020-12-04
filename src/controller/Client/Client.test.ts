@@ -1,8 +1,9 @@
 import { connect, getConnection } from "../../models/db"
-import { addClient, findClientById } from "./Client"
+import { addClient, deleteClientById, findClientById, updateClient } from "./Client"
 
 const good_client = {
-    firstName: "Cheikh G",
+    id: "5fca3891090a8f150c56ca7a",
+    firstName: "Cheikh Gueye",
     lastName: "Wane",
     dateOfBirth: "04/10/1996",
     CIN: "1896199600180",
@@ -16,6 +17,7 @@ const good_client = {
 }
 
 const bad_client = {
+    id: "5fca76a90aa6d63ee4e0fef8",
     firstName: "Cheikh G",
     lastName: "Wane",
     dateOfBirth: "04/10/1996",
@@ -43,7 +45,7 @@ const bad_client_2 = {
     dummy: "dummy"
 }
 
-/* describe("Client insertion tests", () => {
+describe("Client insertion tests", () => {
 
     beforeAll(async () => connect())
     afterAll(async () => {
@@ -70,7 +72,7 @@ const bad_client_2 = {
         let res = await addClient(null, { bad_client_2 })
         expect(res.code).toBe(400)
     })
-}) */
+})
 
 describe("Find client by Id test", () => {
 
@@ -93,5 +95,51 @@ describe("Find client by Id test", () => {
     })
 
 })
+
+describe("Update client", () => {
+
+    beforeAll(async () => {
+        await connect()
+
+    })
+
+    afterAll(async () => {
+        let db = getConnection()
+        await db.close()
+    })
+
+    it("Should not pass if client doesnt exist", async () => {
+        await expect(updateClient(null, { client: bad_client })).rejects.toThrow()
+    })
+
+    it("Update should pass", async () => {
+        await expect(findClientById(null, { client: good_client })).resolves.toBeDefined()
+    })
+
+})
+
+
+describe("Delete client", () => {
+
+    beforeAll(async () => {
+        await connect()
+
+    })
+
+    afterAll(async () => {
+        let db = getConnection()
+        await db.close()
+    })
+
+    it("Should not pass if client doesnt exist", async () => {
+        await expect(deleteClientById(null, { id: "5fca7b82058faa52f0ec77e9" })).resolves.toBeDefined()
+    })
+
+    it("Deletion should pass", async () => {
+        await expect(findClientById(null, { id: "5fca3891090a8f150c56ca7z" })).rejects.toThrow()
+    })
+
+})
+
 
 

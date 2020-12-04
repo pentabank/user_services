@@ -7,6 +7,7 @@ const greeting = () => {
 const resolvers = {
     greeting, allClients,
     findClientById,
+
 }
 
 

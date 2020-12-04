@@ -3,7 +3,7 @@ import logger from "./src/utils/logger"
 import dotenv from "dotenv"
 import { connect } from "./src/models/db"
 import schema from "./src/graphql/Client"
-import { findClientById } from "./src/controller/Client/Client"
+import { findClientById, updateClient } from "./src/controller/Client/Client"
 
 const graphQLHTTP = require('express-graphql')
 const expressPlayground = require('graphql-playground-middleware-express')

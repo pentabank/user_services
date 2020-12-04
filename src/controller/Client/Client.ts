@@ -1,3 +1,4 @@
+import { hashPassword } from "..";
 import Client from "../../models/Client"
 import { getError } from "../../utils/message";
 import { validate } from "../../utils/validator";
@@ -12,14 +13,18 @@ export async function allClients() {
 
 export async function addClient(parent: any, args: any) {
     const { client } = args
-    let _client = new Client(client);
     try {
         validate(client)
         let objectExist = await Client.findOne({ $or: [{ email: client.email }, { phoneNumber: client.phoneNumber }, { CIN: client.CIN }] }).exec()
+
         if (objectExist) {
             throw Error("Client already created")
         }
+        const password = await hashPassword(client.password)
+
+        let _client = new Client({ ...client, password: password });
         let res = await _client.save()
+
         return operationMessage(200, "Client inserted", [res.id])
     } catch (err) {
         let errors = getError(err)
@@ -30,9 +35,8 @@ export async function addClient(parent: any, args: any) {
 
 export async function updateClient(parent: any, args: any) {
     const { client } = args
-    let _client = new Client(client);
     try {
-        let res = await Client.findOneAndUpdate({ _id: _client.id }, { ...client }, { new: true })
+        let res = await Client.findOneAndUpdate({ _id: client.id }, { ...client }, { new: true })
         if (!res) {
             throw new Error("Client doesn't exist")
         }
@@ -48,7 +52,18 @@ export async function findClientById(parent: any, args: any) {
         let res = await Client.findById(id)
         return res
     } catch (error) {
-        throw error
-        /*   throw new Error("Bad Id format") */
+
+        throw new Error("Bad Id format")
+    }
+}
+
+export async function deleteClientById(parent: any, args: any) {
+    const { id } = args
+    try {
+        let res = await Client.findByIdAndDelete(id)
+        console.log(res)
+        return res
+    } catch (error) {
+        throw new Error("Bad Id format")
     }
 }

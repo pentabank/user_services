@@ -1,5 +1,6 @@
 {
-    "editor.formatOnSave": true,
-    "prettier.singleQuote": false
-  }
-  
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": false,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 80
+}

@@ -1,7 +1,8 @@
-import { addClient, updateClient } from '../../controller/Client/Client'
+import { addClient, updateClient, deleteClientById } from '../../controller/Client/Client'
 const mutations = {
     addClient,
-    updateClient
+    updateClient,
+    deleteClientById
 }
 
 export default mutations

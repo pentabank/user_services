@@ -2,13 +2,20 @@ type Query {
   greeting: String
   allClients: [Client]
   findClientById(id: ID!): Client
+  login(
+    email: String!
+    password: String!
+  ): AuthPayload
 }
 
 type Mutation {
-  addClient(client: ClientCreationInput!): Message!
-  deleteClient(id: ID!): Message!
-  updateClient(client: ClientUpdateInput!): Client!
-  login(email: String!, password: String!): AuthPayload
+  addClient(
+    client: ClientCreationInput!
+  ): Message!
+  deleteClientById(id: ID!): Message!
+  updateClient(
+    client: ClientUpdateInput!
+  ): Client!
 }
 
 type Message {
