@@ -1,4 +1,4 @@
-import { addClient } from "../controller/Client"
+import { addClient } from "../controller/Client/Client"
 import { validate } from "./validator"
 
 const client = {

@@ -10,9 +10,9 @@ interface ConnectionStatus {
 let db: any = null
 dotenv.config()
 
-export function connect(): ConnectionStatus {
+export async function connect() {
     const uri: string = process.env.MONGO_URL || ""
-    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('connected', function () {

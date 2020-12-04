@@ -7,6 +7,12 @@ export interface Message {
 
 export function getError(error: any) {
     let errors = []
+    if (error.name == "CastError") {
+        return [error.message]
+    }
+    if (error.name == "Error") {
+        return [error.message]
+    }
     if (error.name == "ClientCreationError") {
         return error.err
     }

@@ -6,12 +6,22 @@ export class ClientCreationError extends Error {
     err: string[] = []
     constructor(errors: string[]) {
         super('The request is invalid.');
-        this.err = errors
         this.name = "ClientCreationError"
+        this.err = errors
     }
 
+    getErr() {
+        return this.err
+    }
 
 }
+
+
+function validateEmail(email: string) {
+    let reg = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
+    return reg.test(email)
+}
+
 
 function validateCIN(cin: string) {
     //CIN format 13 digits no string
@@ -30,12 +40,20 @@ function validatePassword(password: string, confirmPassword: string): boolean {
 
 export function validate(client: ClientCreationInput) {
     let errors = []
-    const { password, confirmPassword, CIN, age, isActive, ...remaining } = client
+    const { password, confirmPassword, CIN, email, age, isActive, ...remaining } = client
     for (const [key, value] of Object.entries(remaining)) {
         if (!value.length) {
             errors.push(`${key.toUpperCase()} musn't be null`)
         }
     }
+    if (age <= 0) {
+        errors.push(ERROR.CLIENT.AGE)
+    }
+
+    if (!validateEmail(email)) {
+        errors.push(ERROR.CLIENT.EMAIL)
+    }
+
     if (password !== confirmPassword) {
         errors.push(ERROR.CLIENT.CONFIRM)
     }

@@ -1,19 +1,20 @@
 type Query {
-  greetings: String
+  greeting: String
   allClients: [Client]
-  objectionCreationError: String!
+  findClientById(id: ID!): Client
 }
 
 type Mutation {
-  addClient(client: ClientCreationInput!): ID!
+  addClient(client: ClientCreationInput!): Message!
   deleteClient(id: ID!): Message!
-  updateClient(client: ClientCreationInput!): Client!
+  updateClient(client: ClientUpdateInput!): Client!
   login(email: String!, password: String!): AuthPayload
 }
 
 type Message {
   code: Int!
-  message: String!
+  content: String!
+  data: [String!]
 }
 
 type AuthPayload {
