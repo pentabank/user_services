@@ -1,6 +1,6 @@
 import ERROR from "./error_message.json"
-import { ClientCreationInput } from "../GraphQLTypes/types"
-
+/* import { ClientCreationInput } from "../GraphQLTypes/types"
+ */
 export class ClientCreationError extends Error {
     err: string[] = []
     constructor(errors: string[]) {
@@ -37,14 +37,14 @@ function validatePassword(password: string, confirmPassword: string): boolean {
 
 /* function checkPhoneNumber() */
 
-export function validate(client: ClientCreationInput) {
+export function validate(client: any) {
     let errors = []
     const { password, confirmPassword, CIN, email, age, isActive, ...remaining } = client
-    for (const [key, value] of Object.entries(remaining)) {
-        if (!value.length) {
-            errors.push(`${key.toUpperCase()} musn't be null`)
-        }
-    }
+    /*  for (const [key, value] of Object.entries(remaining)) {
+         if (!value.length) {
+             errors.push(`${key.toUpperCase()} musn't be null`)
+         }
+     } */
     if (age <= 0) {
         errors.push(ERROR.CLIENT.AGE)
     }

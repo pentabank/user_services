@@ -1,16 +1,6 @@
 type Query {
   greeting: String
   allClients: [Client]
-<<<<<<< HEAD:src/graphql/Client/client.graphql
-<<<<<<< Updated upstream:src/graphql/Client/client.graphql
-}
-
-type Mutation {
-  addClient(client: ClientCreationInput!): ID!
-  deleteClient(id: ID!): Message!
-  updateClient(client: ClientCreationInput!): Client!
-  login(email: String!, password: String!): AuthPayload
-=======
   findClientByIdOrEmail(
     id: ID
     email: String
@@ -32,25 +22,7 @@ type Mutation {
   activeAccount(
     id: String!
     otpCode: String!
-  ): Boolean!
->>>>>>> Stashed changes:src/graphql/schema/client.graphql
-=======
-  findClientById(id: ID!): Client
-  login(
-    email: String!
-    password: String!
-  ): AuthPayload
-}
-
-type Mutation {
-  addClient(
-    client: ClientCreationInput!
-  ): Message!
-  deleteClientById(id: ID!): Message!
-  updateClient(
-    client: ClientUpdateInput!
-  ): Client!
->>>>>>> feat/user-creation:src/graphql/schema/client.graphql
+  ): Boolean
 }
 
 type Message {

@@ -16,14 +16,9 @@ export type Query = {
   __typename?: 'Query';
   greeting?: Maybe<Scalars['String']>;
   allClients?: Maybe<Array<Maybe<Client>>>;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
   findClientByIdOrEmail?: Maybe<Client>;
-  login?: Maybe<AuthPayload>;
-  signup: AuthPayload;
+  login: Scalars['String'];
   regenerateToken: Message;
-  activeAccount: Message;
 };
 
 
@@ -35,22 +30,12 @@ export type QueryFindClientByIdOrEmailArgs = {
 
 export type QueryLoginArgs = {
   email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-
-export type QuerySignupArgs = {
-  client: ClientCreationInput;
+  userPassword: Scalars['String'];
 };
 
 
 export type QueryRegenerateTokenArgs = {
-  email: Scalars['String'];
-};
-
-
-export type QueryActiveAccountArgs = {
-  otpCode: Scalars['String'];
+  userId: Scalars['String'];
 };
 
 export type Mutation = {
@@ -58,6 +43,8 @@ export type Mutation = {
   addClient: Client;
   deleteClientById?: Maybe<Client>;
   updateClient: Client;
+  signup: Scalars['String'];
+  activeAccount?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -75,6 +62,17 @@ export type MutationUpdateClientArgs = {
   client: ClientUpdateInput;
 };
 
+
+export type MutationSignupArgs = {
+  client: ClientCreationInput;
+};
+
+
+export type MutationActiveAccountArgs = {
+  id: Scalars['String'];
+  otpCode: Scalars['String'];
+};
+
 export type Message = {
   __typename?: 'Message';
   code: Scalars['Int'];
@@ -82,16 +80,10 @@ export type Message = {
   data?: Maybe<Array<Scalars['String']>>;
 };
 
-export type AuthPayload = {
-  __typename?: 'AuthPayload';
-  user?: Maybe<Client>;
-  token?: Maybe<Scalars['String']>;
-};
-
 
 export type Client = {
   __typename?: 'Client';
-  id?: Maybe<Scalars['ID']>;
+  _id?: Maybe<Scalars['ID']>;
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
   dateOfBirth?: Maybe<Scalars['Date']>;
@@ -110,7 +102,6 @@ export type ClientCreationInput = {
   CIN: Scalars['String'];
   address: Scalars['String'];
   phoneNumber: Scalars['String'];
-  isActive: Scalars['Boolean'];
   age: Scalars['Int'];
   email: Scalars['String'];
   password: Scalars['String'];

@@ -25,7 +25,6 @@ export async function addClient(parent: any, args: any) {
 
         let _client = new Client({ ...client, password: password });
         let res = await _client.save()
-
         return res
     } catch (err) {
         let errors = getError(err)

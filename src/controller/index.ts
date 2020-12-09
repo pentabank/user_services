@@ -2,7 +2,6 @@ import mongoose from "mongoose"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { addClient, findClientByIdOrEmail, updateClient } from "./Client/Client"
-import { Client } from "../GraphQLTypes/types"
 import otpModel from "../models/otp"
 
 let otpGenerator = require('otp-generator')
@@ -33,11 +32,11 @@ export async function login(parent: any, { email, userPassword }: any) {
 
 export async function signup(parent: any, args: any) {
 
-    let user: Client = await addClient(null, args)
+    let user: any = await addClient(null, args)
     let otp = await generateToken()
 
     let res = await otpModel.create({
-        userId: user.id,
+        userId: user._id,
         token: otp.toUpperCase()
     })
     return otp.toUpperCase()
@@ -51,7 +50,6 @@ export async function activeAccount(parent: any, args: any) {
 
 
     let check: any = await clientModel.findOne({ $and: [{ _id: id }, { isActive: true }] })
-    console.log(check)
     if (check) {
         throw new Error("Account already activated")
     }
