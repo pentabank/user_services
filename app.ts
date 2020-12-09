@@ -4,7 +4,6 @@ import dotenv from "dotenv"
 import { connect } from "./src/models/db"
 import schema from "./src/graphql/Client"
 
-
 const graphQLHTTP = require('express-graphql')
 const expressPlayground = require('graphql-playground-middleware-express')
     .default
@@ -19,6 +18,8 @@ app.listen(PORT, () => {
     console.log(`[server]: Server is running at https://localhost:${PORT}`);
 })
 
-app.use('/graphql', graphQLHTTP.graphqlHTTP({ schema: schema }))
+app.use('/graphql', graphQLHTTP.graphqlHTTP({
+    schema: schema
+}))
 app.get('/playground', expressPlayground({ endpoint: '/graphql' }))
 connect()

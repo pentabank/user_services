@@ -1,6 +1,7 @@
 type Query {
-  greetings: String
+  greeting: String
   allClients: [Client]
+<<<<<<< HEAD:src/graphql/Client/client.graphql
 <<<<<<< Updated upstream:src/graphql/Client/client.graphql
 }
 
@@ -33,11 +34,29 @@ type Mutation {
     otpCode: String!
   ): Boolean!
 >>>>>>> Stashed changes:src/graphql/schema/client.graphql
+=======
+  findClientById(id: ID!): Client
+  login(
+    email: String!
+    password: String!
+  ): AuthPayload
+}
+
+type Mutation {
+  addClient(
+    client: ClientCreationInput!
+  ): Message!
+  deleteClientById(id: ID!): Message!
+  updateClient(
+    client: ClientUpdateInput!
+  ): Client!
+>>>>>>> feat/user-creation:src/graphql/schema/client.graphql
 }
 
 type Message {
   code: Int!
-  message: String!
+  content: String!
+  data: [String!]
 }
 
 scalar Date
@@ -56,7 +75,6 @@ type Client {
 }
 
 input ClientCreationInput {
-  id: ID!
   firstName: String!
   lastName: String!
   dateOfBirth: Date!
@@ -65,6 +83,19 @@ input ClientCreationInput {
   phoneNumber: String!
   age: Int!
   email: String!
+  password: String!
+  confirmPassword: String!
+}
+
+input ClientUpdateInput {
+  firstName: String!
+  lastName: String!
+  dateOfBirth: Date!
+  CIN: String!
+  address: String!
+  phoneNumber: String!
+  isActive: Boolean!
+  age: Int!
   password: String!
   confirmPassword: String!
 }

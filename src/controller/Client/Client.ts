@@ -32,40 +32,40 @@ export async function addClient(parent: any, args: any) {
         console.log(errors)
         throw err
         /*  return operationMessage(400, "An error occured while trying to insert a new client. See error(s) below for more details", errors) */
+
     }
-}
 
 
-export async function updateClient(parent: any, args: any) {
-    const { client } = args
-    console.log(client)
-    try {
-        let res = await Client.findOneAndUpdate({ _id: client._id }, { ...client }, { new: true, useFindAndModify: true })
-        if (!res) {
-            throw new Error("Client doesn't exist")
+    export async function updateClient(parent: any, args: any) {
+        const { client } = args
+        console.log(client)
+        try {
+            let res = await Client.findOneAndUpdate({ _id: client._id }, { ...client }, { new: true, useFindAndModify: true }).lean()
+            if (!res) {
+                throw new Error("Client doesn't exist")
+            }
+            return res
+        } catch (error) {
+            throw error
         }
-        return res
-    } catch (error) {
-        throw error
     }
-}
 
-export async function findClientByIdOrEmail(parent: any, args: any) {
-    const { id, email } = args
-    try {
-        let res = await Client.findOne({ $or: [{ _id: id }, { email: email }] }).lean()
-        return res
-    } catch (error) {
-        throw new Error("Bad Id format")
+    export async function findClientByIdOrEmail(parent: any, args: any) {
+        const { id, email } = args
+        try {
+            let res = await Client.findOne({ $or: [{ _id: id }, { email: email }] }).lean()
+            return res
+        } catch (error) {
+            throw new Error("Bad Id format")
+        }
     }
-}
 
-export async function deleteClientById(parent: any, args: any) {
-    const { id } = args
-    try {
-        let res = await Client.findByIdAndDelete(id)
-        return res
-    } catch (error) {
-        throw new Error("Bad Id format")
+    export async function deleteClientById(parent: any, args: any) {
+        const { id } = args
+        try {
+            let res = await Client.findByIdAndDelete(id)
+            return res
+        } catch (error) {
+            throw new Error("Bad Id format")
+        }
     }
-}
