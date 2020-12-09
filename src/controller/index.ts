@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import mongoose from "mongoose"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
@@ -99,4 +97,3 @@ export async function regenerateToken(parent: any, { userId }: any) {
         data: [otp.toUpperCase()]
     }
 }
->>>>>>> Stashed changes
