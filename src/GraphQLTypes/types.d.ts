@@ -14,17 +14,28 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  greetings?: Maybe<Scalars['String']>;
+  greeting?: Maybe<Scalars['String']>;
   allClients?: Maybe<Array<Maybe<Client>>>;
-  objectionCreationError: Scalars['String'];
+  findClientById?: Maybe<Client>;
+  login?: Maybe<AuthPayload>;
+};
+
+
+export type QueryFindClientByIdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryLoginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addClient: Scalars['ID'];
-  deleteClient: Message;
+  addClient: Message;
+  deleteClientById: Message;
   updateClient: Client;
-  login?: Maybe<AuthPayload>;
 };
 
 
@@ -33,25 +44,20 @@ export type MutationAddClientArgs = {
 };
 
 
-export type MutationDeleteClientArgs = {
+export type MutationDeleteClientByIdArgs = {
   id: Scalars['ID'];
 };
 
 
 export type MutationUpdateClientArgs = {
-  client: ClientCreationInput;
-};
-
-
-export type MutationLoginArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  client: ClientUpdateInput;
 };
 
 export type Message = {
   __typename?: 'Message';
   code: Scalars['Int'];
-  message: Scalars['String'];
+  content: Scalars['String'];
+  data?: Maybe<Array<Scalars['String']>>;
 };
 
 export type AuthPayload = {
