@@ -14,11 +14,12 @@ let userSchema = new mongoose.Schema({
     CIN: { type: String, required: true },
     address: { type: String, required: true },
     phoneNumber: { type: String, required: true, minlength: 12 },
-    createdAt: { type: Date, default: Date.now(), required: true },
     isActive: { type: Boolean, default: false },
     age: { type: Number, min: 18, max: 60, required: true },
 
-})
+},
+)
 userSchema.set(' discriminatorKey', 'type')
+userSchema.set('timestamps', true)
 
 export default mongoose.model('User', userSchema)

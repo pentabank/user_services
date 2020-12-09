@@ -1,5 +1,12 @@
 {
+<<<<<<< Updated upstream
     "editor.formatOnSave": true,
     "prettier.singleQuote": false
   }
   
+=======
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": false,
+  "editor.wordWrap": "bounded"
+}
+>>>>>>> Stashed changes

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 const CLIENTS = [
     {
@@ -21,13 +22,26 @@ const resolvers = {
         allClients: () => CLIENTS
     }
 }
+=======
+import { allClients, findClientByIdOrEmail } from "../../controller/Client/Client"
+
+import { regenerateToken, login } from "../../controller"
+>>>>>>> Stashed changes
 
 const greeting = () => {
     return "Hello GraphQL"
 }
 
+<<<<<<< Updated upstream
 
 function addClient() {
+=======
+const resolvers = {
+    greeting, allClients,
+    findClientByIdOrEmail,
+    regenerateToken, login
+}
+>>>>>>> Stashed changes
 
 }
 

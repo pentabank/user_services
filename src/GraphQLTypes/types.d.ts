@@ -14,16 +14,50 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  greetings?: Maybe<Scalars['String']>;
+  greeting?: Maybe<Scalars['String']>;
   allClients?: Maybe<Array<Maybe<Client>>>;
+<<<<<<< Updated upstream
+=======
+  findClientByIdOrEmail?: Maybe<Client>;
+  login?: Maybe<AuthPayload>;
+  signup: AuthPayload;
+  regenerateToken: Message;
+  activeAccount: Message;
+};
+
+
+export type QueryFindClientByIdOrEmailArgs = {
+  id?: Maybe<Scalars['ID']>;
+  email?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryLoginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type QuerySignupArgs = {
+  client: ClientCreationInput;
+};
+
+
+export type QueryRegenerateTokenArgs = {
+  email: Scalars['String'];
+};
+
+
+export type QueryActiveAccountArgs = {
+  otpCode: Scalars['String'];
+>>>>>>> Stashed changes
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addClient: Scalars['ID'];
-  deleteClient: Message;
+  addClient: Client;
+  deleteClientById?: Maybe<Client>;
   updateClient: Client;
-  login?: Maybe<AuthPayload>;
 };
 
 
@@ -32,25 +66,20 @@ export type MutationAddClientArgs = {
 };
 
 
-export type MutationDeleteClientArgs = {
+export type MutationDeleteClientByIdArgs = {
   id: Scalars['ID'];
 };
 
 
 export type MutationUpdateClientArgs = {
-  client: ClientCreationInput;
-};
-
-
-export type MutationLoginArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  client: ClientUpdateInput;
 };
 
 export type Message = {
   __typename?: 'Message';
   code: Scalars['Int'];
-  message: Scalars['String'];
+  content: Scalars['String'];
+  data?: Maybe<Array<Scalars['String']>>;
 };
 
 export type AuthPayload = {
@@ -69,7 +98,6 @@ export type Client = {
   CIN?: Maybe<Scalars['String']>;
   address?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['Date']>;
   isActive?: Maybe<Scalars['Boolean']>;
   age?: Maybe<Scalars['Int']>;
   email?: Maybe<Scalars['String']>;
@@ -83,7 +111,6 @@ export type ClientCreationInput = {
   CIN: Scalars['String'];
   address: Scalars['String'];
   phoneNumber: Scalars['String'];
-  createdAt: Scalars['Date'];
   isActive: Scalars['Boolean'];
   age: Scalars['Int'];
   email: Scalars['String'];

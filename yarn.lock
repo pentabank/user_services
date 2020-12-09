@@ -5741,6 +5741,22 @@ os-tmpdir@~1.0.2:
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
 
+<<<<<<< Updated upstream
+=======
+osenv@^0.1.4:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/osenv/-/osenv-0.1.5.tgz#85cdfafaeb28e8677f416e287592b5f3f49ea410"
+  integrity sha512-0CWcCECdMVc2Rw3U5w9ZjqX6ga6ubk1xDVKxtBQPK7wis/0F2r9T6k4ydGYhecl7YUBxBVxhL5oisPsNxAPe2g==
+  dependencies:
+    os-homedir "^1.0.0"
+    os-tmpdir "^1.0.0"
+
+otp-generator@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/otp-generator/-/otp-generator-2.0.0.tgz#51105b291ef966d5b1566b64b693ec96e6930fdf"
+  integrity sha512-VgnQEx+bIgCNodGisqZy+7wZxAnyF1rwwS+DJUBLSNhZ+D789yvknABAAEjwrk05SjMysfY4f4+XJlxSs+p1lg==
+
+>>>>>>> Stashed changes
 p-cancelable@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/p-cancelable/-/p-cancelable-1.1.0.tgz#d078d15a3af409220c886f1d9a0ca2e441ab26cc"

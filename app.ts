@@ -21,10 +21,4 @@ app.listen(PORT, () => {
 
 app.use('/graphql', graphQLHTTP.graphqlHTTP({ schema: schema }))
 app.get('/playground', expressPlayground({ endpoint: '/graphql' }))
-
-
-app.get('/', function (req, res) {
-    res.send('hello, world!')
-})
-
 connect()
