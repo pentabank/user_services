@@ -2,6 +2,8 @@ version: "3"
 services:
   user_services:
     container_name: user_services
+    context: .
+    dockerfile: ./Dockerfile
     build: .
     ports:
       - "3000:3000"
