@@ -16,7 +16,7 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: search_engine_web
+  IMAGE_NAME: user_services
     
 jobs:
   test:
@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: '12.x'
       - run: yarn
-      - run: yarn jest
+      - run: yarn jest validator.test.ts
       - name: Build
         run: |
           if [ -f docker-compose.yml ]; then
