@@ -1,3 +1,4 @@
+import { GraphQLError } from "graphql";
 import { hashPassword } from "..";
 import Client from "../../models/Client"
 import { getError } from "../../utils/message";
@@ -7,7 +8,7 @@ function operationMessage(code: number, content: string, data: Object) {
     return { code: code, content: content, data: data }
 }
 
-export async function allClients() {
+export async function allClients(parent: any, args: any, context: any) {
     return Client.find()
 }
 

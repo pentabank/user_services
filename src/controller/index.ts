@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { addClient, findClientByIdOrEmail, updateClient } from "./Client/Client"
 import otpModel from "../models/otp"
+import { GraphQLError } from "graphql"
 
 let otpGenerator = require('otp-generator')
 
