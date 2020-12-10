@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { addClient, findClientByIdOrEmail, updateClient } from "./Client/Client"
 import otpModel from "../models/otp"
-import { GraphQLError } from "graphql"
 
 let otpGenerator = require('otp-generator')
 
@@ -86,7 +85,7 @@ export async function regenerateToken(parent: any, { userId }: any) {
     }
     let otp = await generateToken()
     let res = await otpModel.create({
-        userId: userId,
+        userId: user._id,
         token: otp.toUpperCase()
     })
 
