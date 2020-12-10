@@ -30,7 +30,6 @@ jobs:
           else
             docker build . --file Dockerfile
           fi
-          docker-compose run -i -t /bin/bash yarn jest
 
   push:
     # Ensure test job passes before pushing image.
