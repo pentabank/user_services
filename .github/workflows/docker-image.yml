@@ -32,10 +32,11 @@ jobs:
       - name: Build
         run: |
           if [ -f docker-compose.yml ]; then
-            docker-compose build
+            docker-compose --file docker-compse.yml up
           else
             docker build . --file .Dockerfile
           fi
+          docker-compose run -i -t /bin/bash yarn jest
 
   push:
     # Ensure test job passes before pushing image.
