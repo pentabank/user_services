@@ -23,12 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use node
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-      - run: yarn
-      - run: yarn jest Client.test.ts
       - name: Build
         run: |
           if [ -f docker-compose.yml ]; then
