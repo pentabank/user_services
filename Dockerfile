@@ -4,7 +4,7 @@ COPY . /app
 
 WORKDIR /app
 
-RUN yarn install --verbose
+RUN yarn 
 
 EXPOSE 3000
 
