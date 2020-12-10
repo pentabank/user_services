@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   user_services:
+    image: user_services:latest
     build:
       context: .
       dockerfile: Dockerfile
