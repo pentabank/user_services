@@ -1,13 +1,13 @@
-FROM node:12.18.1
+FROM node:latest
 
 ENV NODE_ENV=production
 
+COPY . /app
+
 WORKDIR /app
 
-COPY ["package.json", "yarn.lock", "./"]
+RUN yarn
 
-RUN npm install --production
+EXPOSE 3000
 
-COPY . .
-
-CMD [ "node", "app.ts" ]
+CMD [ "node","app.ts" ]

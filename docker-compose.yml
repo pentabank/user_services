@@ -1,0 +1,20 @@
+version: "3"
+services:
+  user_services:
+    container_name: user_services
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    links:
+      - mongo
+  mongo:
+    image: "mongo"
+    container_name: mongodb
+    restart: unless-stopped
+    volumes:
+      - ./mongodbdata:/data/db
