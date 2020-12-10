@@ -1,10 +1,10 @@
-version: "3"
+version: "3.9"
 services:
   user_services:
     container_name: user_services
-    context: .
-    dockerfile: ./Dockerfile
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
