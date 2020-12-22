@@ -62,9 +62,10 @@ export async function activeAccount(parent: any, args: any) {
         throw new Error("Token has expired")
     }
 
-    //ActiveAccount
+    //active account
     let user = await findClientByIdOrEmail(null, { id: id })
     let _user = { ...user, isActive: true }
+
     await updateClient(null, { client: _user })
 
     return true
@@ -79,11 +80,12 @@ export async function generateToken(size: number = 6) {
 }
 
 export async function regenerateToken(parent: any, { userId }: any) {
-    let user = await findClientByIdOrEmail(null, { id: userId })
+    let user: mongoose.Document = await findClientByIdOrEmail(null, { id: userId })
     if (!user) {
         throw new Error("No such user found")
     }
     let otp = await generateToken()
+
     let res = await otpModel.create({
         userId: user._id,
         token: otp.toUpperCase()

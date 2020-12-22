@@ -1,5 +1,9 @@
-import mongoose from "mongoose"
+import mongoose, { Document, Model } from "mongoose"
 
+interface IOtp extends Document {
+    userId: String,
+    token: String
+}
 
 let otpSchema = new mongoose.Schema({
     userId: { type: mongoose.Types.ObjectId, ref: "User" },
@@ -7,5 +11,6 @@ let otpSchema = new mongoose.Schema({
 })
 otpSchema.set("timestamps", true)
 
-export default mongoose.model("OTPCode", otpSchema)
+const Otp: Model<IOtp> = mongoose.model("OTPCode", otpSchema)
+export default Otp
 
