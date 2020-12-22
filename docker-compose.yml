@@ -1,10 +1,7 @@
-version: "3.9"
+version: "3.3"
 services:
   user_services:
-    image: user_services:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: docker.pkg.github.com/pentabank/user_services/user_services:latest
     ports:
       - "3000:3000"
     volumes:
