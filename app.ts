@@ -15,7 +15,7 @@ dotenv.config()
 app.use(logger)
 
 app.listen(PORT, () => {
-    console.log(`[server]: Server is running at https://localhost:${PORT}`);
+    console.log(`[server]: Server is running at https://0.0.0.0:${PORT}`);
 })
 
 app.use('/graphql', graphQLHTTP.graphqlHTTP({
