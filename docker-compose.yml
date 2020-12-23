@@ -2,6 +2,7 @@ version: "3.3"
 services:
   user_services:
     build: .
+    image: user_services
     ports:
       - "3000:3000"
     volumes:
