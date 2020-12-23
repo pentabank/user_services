@@ -1,12 +1,9 @@
 version: "3.3"
 services:
   user_services:
-    build: .
-    image: user_services
+    image: cheikhgwane/pentabank
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
     depends_on:
       - mongo
     links:
