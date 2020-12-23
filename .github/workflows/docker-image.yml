@@ -24,12 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build
-        run: |
-          if [ -f docker-compose.yml ]; then
-            docker-compose build
-          else
-            docker build . --file Dockerfile
-          fi
+        run: docker-compose build
 
   push:
     # Ensure test job passes before pushing image.
