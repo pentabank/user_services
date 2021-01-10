@@ -3,6 +3,7 @@ import logger from "./src/utils/logger"
 import dotenv from "dotenv"
 import { connect } from "./src/models/db"
 import schema from "./src/graphql/Client"
+import authenticateJWt from "./src/middleware/VerifyToken"
 
 const graphQLHTTP = require('express-graphql')
 const expressPlayground = require('graphql-playground-middleware-express')
@@ -18,7 +19,7 @@ app.listen(PORT, () => {
     console.log(`[server]: Server is running at https://0.0.0.0:${PORT}`);
 })
 
-app.use('/graphql', graphQLHTTP.graphqlHTTP({
+app.use('/graphql', authenticateJWt, graphQLHTTP.graphqlHTTP({
     schema: schema
 }))
 app.get('/playground', expressPlayground({ endpoint: '/graphql' }))

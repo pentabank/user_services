@@ -39,7 +39,6 @@ export async function addClient(parent: any, args: any) {
 
 export async function updateClient(parent: any, args: any) {
     const { client } = args
-    console.log(client)
     try {
         let res = await Client.findOneAndUpdate({ _id: client._id }, { ...client }, { new: true, useFindAndModify: true }).lean()
         if (!res) {
