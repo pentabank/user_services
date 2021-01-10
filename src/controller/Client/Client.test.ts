@@ -68,7 +68,6 @@ describe("Update client", () => {
 
     beforeAll(async () => {
         await connect()
-
     })
 
     afterAll(async () => {
@@ -91,7 +90,6 @@ describe("Delete client", () => {
 
     beforeAll(async () => {
         await connect()
-
     })
 
     afterAll(async () => {

@@ -41,30 +41,27 @@ export async function signup(parent: any, args: any) {
     })
     return otp.toUpperCase()
 
-
 }
 
 export async function activeAccount(parent: any, args: any) {
-    const { id, otpCode } = args
+    const { email, otpCode } = args
     const clientModel = mongoose.model("Client")
 
-
-    let check: any = await clientModel.findOne({ $and: [{ _id: id }, { isActive: true }] })
-    if (check) {
+    let client: any = await clientModel.findOne({ $and: [{ email: email }, { isActive: true }] })
+    if (client) {
         throw new Error("Account already activated")
     }
+    //active account
+    let user = await findClientByIdOrEmail(null, { email: email })
+    let _user = { ...user, isActive: true }
 
-    let res: any = await otpModel.findOne({ userId: id, token: otpCode }).sort({ createdAt: -1 }).exec()
+    let res: any = await otpModel.findOne({ userId: user._id, token: otpCode }).sort({ createdAt: -1 }).exec()
     let created = new Date(new Date(res.createdAt)).getTime()
     let current = new Date().getTime()
 
     if (created - current > OTP_EXP) {
         throw new Error("Token has expired")
     }
-
-    //active account
-    let user = await findClientByIdOrEmail(null, { id: id })
-    let _user = { ...user, isActive: true }
 
     await updateClient(null, { client: _user })
 
@@ -79,8 +76,8 @@ export async function generateToken(size: number = 6) {
     return await otpGenerator.generate(size, { upperCase: false, specialChars: false });
 }
 
-export async function regenerateToken(parent: any, { userId }: any) {
-    let user: mongoose.Document = await findClientByIdOrEmail(null, { id: userId })
+export async function regenerateToken(parent: any, { email }: any) {
+    let user: mongoose.Document = await findClientByIdOrEmail(null, { email: email })
     if (!user) {
         throw new Error("No such user found")
     }

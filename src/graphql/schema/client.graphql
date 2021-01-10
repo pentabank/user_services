@@ -9,7 +9,7 @@ type Query {
     email: String!
     userPassword: String!
   ): String!
-  regenerateToken(userId: String!): Message!
+  regenerateToken(email: String!): Message!
 }
 
 type Mutation {
@@ -20,7 +20,7 @@ type Mutation {
   ): Client!
   signup(client: ClientCreationInput!): String!
   activeAccount(
-    id: String!
+    email: String!
     otpCode: String!
   ): Boolean
 }

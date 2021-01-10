@@ -35,7 +35,7 @@ export type QueryLoginArgs = {
 
 
 export type QueryRegenerateTokenArgs = {
-  userId: Scalars['String'];
+  email: Scalars['String'];
 };
 
 export type Mutation = {
@@ -69,7 +69,7 @@ export type MutationSignupArgs = {
 
 
 export type MutationActiveAccountArgs = {
-  id: Scalars['String'];
+  email: Scalars['String'];
   otpCode: Scalars['String'];
 };
 

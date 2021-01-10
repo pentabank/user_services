@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "ts-node app.ts",
+    "start": "nodemon app.ts",
     "test": "jest",
     "build": "tsc -p .",
     "generate": "graphql-codegen"
@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.16",
     "morgan": "~1.9.1",
+    "nodemon": "^2.0.7",
     "otp-generator": "^2.0.0"
   },
   "devDependencies": {
