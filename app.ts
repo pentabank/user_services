@@ -8,19 +8,20 @@ import authenticateJWt from "./src/middleware/VerifyToken"
 const graphQLHTTP = require('express-graphql')
 const expressPlayground = require('graphql-playground-middleware-express')
     .default
+dotenv.config()
 
 const PORT = process.env.PORT || 3000
 let app = express()
 
-dotenv.config()
 app.use(logger)
 
 app.listen(PORT, () => {
-    console.log(`[server]: Server is running at https://0.0.0.0:${PORT}`);
+    console.log(`[server]: Server is running at http://localhost:${PORT}/graphql`);
 })
 
-app.use('/graphql', authenticateJWt, graphQLHTTP.graphqlHTTP({
-    schema: schema
+//uncomment in prod environnement
+app.use('/graphql', /* authenticateJWt, */ graphQLHTTP.graphqlHTTP({
+    schema: schema,
 }))
 app.get('/playground', expressPlayground({ endpoint: '/graphql' }))
 connect()
