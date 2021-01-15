@@ -13,7 +13,7 @@ export async function allClients(parent: any, args: any, context: any) {
     try {
         await checkAccesLevel(context)
     } catch (error) {
-        console.log(error.message)
+        throw error
     }
     return Client.find()
 }
