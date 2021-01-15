@@ -1,6 +1,6 @@
 import { allClients, findClientByIdOrEmail } from "../../controller/Client/Client";
 import { regenerateToken, login } from "../../controller";
-import { wrap } from "../utils";
+import { isAuthorized, wrap } from "../../utils/wrapper";
 import _ from "lodash/fp";
 
 
@@ -19,7 +19,7 @@ let privateResolvers = {
     findClientByIdOrEmail,
 };
 
-privateResolvers = wrap(privateResolvers)
+privateResolvers = wrap(privateResolvers, isAuthorized)
 
 let r = {
     ...publicResolvers,

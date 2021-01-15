@@ -25,14 +25,14 @@ export async function login(parent: any, { email, userPassword }: any) {
         throw new Error("Invalid password")
     }
     const { password, ...rest } = user
-    const token = jwt.sign({ user: rest, exp: new Date().getTime() + TOKEN_EXP_TIME }, SECRET)
+    const token = jwt.sign({ user: rest, accessLevel: 0, exp: new Date().getTime() + TOKEN_EXP_TIME }, SECRET)
     return token
 
 }
 
 export async function signup(parent: any, args: any) {
 
-    let user: any = await addClient(null, args)
+    let user: any = await addClient(null, args, null)
     let otp = await generateToken()
 
     let res = await otpModel.create({
@@ -52,7 +52,7 @@ export async function activeAccount(parent: any, args: any) {
         throw new Error("Account already activated")
     }
     //active account
-    let user = await findClientByIdOrEmail(null, { email: email })
+    let user = await findClientByIdOrEmail(null, { email: email }, null)
     let _user = { ...user, isActive: true }
 
     let res: any = await otpModel.findOne({ userId: user._id, token: otpCode }).sort({ createdAt: -1 }).exec()
@@ -63,7 +63,7 @@ export async function activeAccount(parent: any, args: any) {
         throw new Error("Token has expired")
     }
 
-    await updateClient(null, { client: _user })
+    await updateClient(null, { client: _user }, null)
 
     return true
 }
@@ -76,8 +76,8 @@ export async function generateToken(size: number = 6) {
     return await otpGenerator.generate(size, { upperCase: false, specialChars: false });
 }
 
-export async function regenerateToken(parent: any, { email }: any) {
-    let user: mongoose.Document = await findClientByIdOrEmail(null, { email: email })
+export async function regenerateToken(parent: any, { email }: any, context: any) {
+    let user: mongoose.Document = await findClientByIdOrEmail(null, { email: email }, null)
     if (!user) {
         throw new Error("No such user found")
     }

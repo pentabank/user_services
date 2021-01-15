@@ -1,7 +1,7 @@
 import { addClient, updateClient, deleteClientById } from '../../controller/Client/Client'
 
 import { signup, activeAccount } from "../../controller"
-import { wrap } from '../utils'
+import { isAuthorized, wrap } from '../../utils/wrapper'
 
 
 
@@ -15,7 +15,7 @@ let privateMutations = {
     deleteClientById,
 }
 
-privateMutations = wrap(privateMutations)
+privateMutations = wrap(privateMutations, isAuthorized)
 
 const mutations = {
     ...publicMutations, ...privateMutations
