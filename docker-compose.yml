@@ -1,7 +1,8 @@
 version: "3.3"
 services:
   user_services:
-    image: cheikhgwane/pentabank
+    build: .
+    image: user_services
     environment:
         - APP_NAME=${APP_NAME}
         - MONGO_URL=${MONGO_URL}
