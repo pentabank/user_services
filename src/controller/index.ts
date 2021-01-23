@@ -11,20 +11,20 @@ const OTP_EXP: number = 600000
 
 export const TOKEN_EXP_TIME: number = 18000000
 
-export async function login(parent: any, { email, userPassword }: any) {
+export async function login(parent: any, args: any) {
 
     const clientModel = mongoose.model("Client")
-    let user: any = await clientModel.findOne({ $and: [{ email: email }, { isActive: true }] }).lean()
+    let user: any = await clientModel.findOne({ $and: [{ email: args.email }, { isActive: true }] }).lean()
 
     if (!user) {
         throw new Error("No such user found or account not actived")
     }
-    const valid = await bcrypt.compare(userPassword, user.password)
+    const valid = await bcrypt.compare(args.password, user.password)
 
     if (!valid) {
         throw new Error("Invalid password")
     }
-    const { password, ...rest } = user
+    let { password, ...rest } = user
     const token = jwt.sign({ user: rest, accessLevel: 0, exp: new Date().getTime() + TOKEN_EXP_TIME }, SECRET)
     return token
 

@@ -2,7 +2,7 @@ type Query {
   greeting: String
   allClients: [Client]
   findClientByIdOrEmail(id: ID, email: String): Client
-  login(email: String!, userPassword: String!): String!
+  login(email: String!, password: String!): String!
   regenerateToken(email: String!): Message!
 }
 
