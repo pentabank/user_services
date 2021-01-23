@@ -1,21 +1,28 @@
 type Query {
   greeting: String
   allClients: [Client]
-  findClientById(id: ID!): Client
+  findClientByIdOrEmail(
+    id: ID
+    email: String
+  ): Client
   login(
     email: String!
-    password: String!
-  ): AuthPayload
+    userPassword: String!
+  ): String!
+  regenerateToken(email: String!): Message!
 }
 
 type Mutation {
-  addClient(
-    client: ClientCreationInput!
-  ): Message!
-  deleteClientById(id: ID!): Message!
+  addClient(client: ClientCreationInput!): Client!
+  deleteClientById(id: ID!): Client
   updateClient(
     client: ClientUpdateInput!
   ): Client!
+  signup(client: ClientCreationInput!): String!
+  activeAccount(
+    email: String!
+    otpCode: String!
+  ): Boolean
 }
 
 type Message {
@@ -24,22 +31,16 @@ type Message {
   data: [String!]
 }
 
-type AuthPayload {
-  user: Client
-  token: String
-}
-
 scalar Date
 
 type Client {
-  id: ID
+  _id: ID
   firstName: String
   lastName: String
   dateOfBirth: Date
   CIN: String
   address: String
   phoneNumber: String
-  createdAt: Date
   isActive: Boolean
   age: Int
   email: String
@@ -52,8 +53,6 @@ input ClientCreationInput {
   CIN: String!
   address: String!
   phoneNumber: String!
-  createdAt: Date!
-  isActive: Boolean!
   age: Int!
   email: String!
   password: String!

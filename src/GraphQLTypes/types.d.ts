@@ -16,26 +16,35 @@ export type Query = {
   __typename?: 'Query';
   greeting?: Maybe<Scalars['String']>;
   allClients?: Maybe<Array<Maybe<Client>>>;
-  findClientById?: Maybe<Client>;
-  login?: Maybe<AuthPayload>;
+  findClientByIdOrEmail?: Maybe<Client>;
+  login: Scalars['String'];
+  regenerateToken: Message;
 };
 
 
-export type QueryFindClientByIdArgs = {
-  id: Scalars['ID'];
+export type QueryFindClientByIdOrEmailArgs = {
+  id?: Maybe<Scalars['ID']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 
 export type QueryLoginArgs = {
   email: Scalars['String'];
-  password: Scalars['String'];
+  userPassword: Scalars['String'];
+};
+
+
+export type QueryRegenerateTokenArgs = {
+  email: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addClient: Message;
-  deleteClientById: Message;
+  addClient: Client;
+  deleteClientById?: Maybe<Client>;
   updateClient: Client;
+  signup: Scalars['String'];
+  activeAccount?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -53,6 +62,17 @@ export type MutationUpdateClientArgs = {
   client: ClientUpdateInput;
 };
 
+
+export type MutationSignupArgs = {
+  client: ClientCreationInput;
+};
+
+
+export type MutationActiveAccountArgs = {
+  email: Scalars['String'];
+  otpCode: Scalars['String'];
+};
+
 export type Message = {
   __typename?: 'Message';
   code: Scalars['Int'];
@@ -60,23 +80,16 @@ export type Message = {
   data?: Maybe<Array<Scalars['String']>>;
 };
 
-export type AuthPayload = {
-  __typename?: 'AuthPayload';
-  user?: Maybe<Client>;
-  token?: Maybe<Scalars['String']>;
-};
-
 
 export type Client = {
   __typename?: 'Client';
-  id?: Maybe<Scalars['ID']>;
+  _id?: Maybe<Scalars['ID']>;
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
   dateOfBirth?: Maybe<Scalars['Date']>;
   CIN?: Maybe<Scalars['String']>;
   address?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['Date']>;
   isActive?: Maybe<Scalars['Boolean']>;
   age?: Maybe<Scalars['Int']>;
   email?: Maybe<Scalars['String']>;
@@ -89,8 +102,6 @@ export type ClientCreationInput = {
   CIN: Scalars['String'];
   address: Scalars['String'];
   phoneNumber: Scalars['String'];
-  createdAt: Scalars['Date'];
-  isActive: Scalars['Boolean'];
   age: Scalars['Int'];
   email: Scalars['String'];
   password: Scalars['String'];

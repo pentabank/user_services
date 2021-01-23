@@ -1,5 +1,18 @@
-import mongoose from "mongoose"
+import mongoose, { Model } from "mongoose"
 
+
+interface IUser extends mongoose.Document {
+    email: String,
+    password: String,
+    firstName: String
+    lastName: String,
+    dateOfBirth: Date,
+    CIN: String,
+    address: String,
+    phoneNumber: String,
+    isActive: Boolean,
+    age: Number,
+}
 
 const options = {
     discriminatorKey: 'type',
@@ -14,11 +27,13 @@ let userSchema = new mongoose.Schema({
     CIN: { type: String, required: true },
     address: { type: String, required: true },
     phoneNumber: { type: String, required: true, minlength: 12 },
-    createdAt: { type: Date, default: Date.now(), required: true },
     isActive: { type: Boolean, default: false },
     age: { type: Number, min: 18, max: 60, required: true },
-
-})
+},
+)
 userSchema.set(' discriminatorKey', 'type')
+userSchema.set('timestamps', true)
 
-export default mongoose.model('User', userSchema)
+const User: Model<IUser> = mongoose.model('User', userSchema)
+
+export default User

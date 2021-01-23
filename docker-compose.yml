@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+  user_services:
+    image: cheikhgwane/pentabank
+    environment:
+        - APP_NAME=${APP_NAME}
+        - MONGO_URL=${MONGO_URL}
+        - PORT=${PORT}
+        - ENV=${ENV}
+        - APP_SECRET=${APP_SECRET}
+        - OTP_EXP_TIME=${OTP_EXP_TIME}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    links:
+      - mongo
+  mongo:
+    image: "mongo:4.2.3"
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=pentabank
+      - MONGO_INITDB_ROOT_PASSWORD=FzGtf2nS7RSZyj5
+    restart: unless-stopped
+    volumes:
+      - ./mongodbdata:/data/db

@@ -1,6 +1,20 @@
 {
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+    "editor.formatOnSave": true,
+    "prettier.singleQuote": false
+  }
+  
+=======
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": false,
+  "editor.wordWrap": "bounded"
+}
+>>>>>>> Stashed changes
+=======
   "editor.formatOnSave": true,
   "prettier.singleQuote": false,
   "editor.wordWrap": "wordWrapColumn",
   "editor.wordWrapColumn": 80
 }
+>>>>>>> feat/user-creation
