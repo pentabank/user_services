@@ -1,28 +1,17 @@
 type Query {
   greeting: String
   allClients: [Client]
-  findClientByIdOrEmail(
-    id: ID
-    email: String
-  ): Client
-  login(
-    email: String!
-    userPassword: String!
-  ): String!
+  findClientByIdOrEmail(id: ID, email: String): Client
+  login(email: String!, userPassword: String!): String!
   regenerateToken(email: String!): Message!
 }
 
 type Mutation {
   addClient(client: ClientCreationInput!): Client!
   deleteClientById(id: ID!): Client
-  updateClient(
-    client: ClientUpdateInput!
-  ): Client!
+  updateClient(client: ClientUpdateInput!): Client!
   signup(client: ClientCreationInput!): String!
-  activeAccount(
-    email: String!
-    otpCode: String!
-  ): Boolean
+  activeAccount(email: String!, otpCode: String!): Boolean
 }
 
 type Message {
