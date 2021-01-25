@@ -1,7 +1,6 @@
 import { GraphQLError } from "graphql";
 import { hashPassword } from "..";
 import Client from "../../models/Client"
-import { getError } from "../../utils/message";
 import { validate } from "../../utils/validator";
 import { checkAccesLevel } from "../../utils/wrapper";
 
@@ -63,13 +62,11 @@ export async function updateClient(parent: any, args: any, context: any) {
 export async function findClientByIdOrEmail(parent: any, args: any, context: any) {
     const { id, email } = args
     try {
-        if (context) {
-            await checkAccesLevel(context)
-        }
+
         let res = await Client.findOne({ $or: [{ _id: id }, { email: email }] }).lean()
         return res
     } catch (error) {
-        throw new Error("Bad Id format")
+        throw error
     }
 }
 

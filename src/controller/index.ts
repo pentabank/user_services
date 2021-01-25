@@ -24,8 +24,8 @@ export async function login(parent: any, args: any) {
     if (!valid) {
         throw new Error("Invalid password")
     }
-    let { password, ...rest } = user
-    const token = jwt.sign({ user: rest, accessLevel: 0, exp: new Date().getTime() + TOKEN_EXP_TIME }, SECRET)
+
+    const token = jwt.sign({ userId: user._id, accessLevel: 0, exp: new Date().getTime() + TOKEN_EXP_TIME }, SECRET)
     return token
 
 }

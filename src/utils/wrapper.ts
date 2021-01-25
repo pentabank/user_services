@@ -4,32 +4,35 @@ import jwt from "jsonwebtoken"
 
 const SECRET: string = process.env.APP_SECRET || ""
 
-export const isAuthorized = (fn: Function) => async (obj: any, args: any, context: any, info: any) => {
+const verifyToken = (context: any) => {
     let authHeader = context.headers.authorization;
     if (authHeader) {
         try {
-            jwt.verify(authHeader, SECRET)
-            return await fn(obj, args, context, info);
+            return jwt.verify(authHeader, SECRET)
         } catch (error) {
             throw error
         }
     }
-    throw new GraphQLError("Unauthorized : no access token supplied");
-};
+}
+
+export const isAuthorized = (fn: Function) => async (obj: any, args: any, context: any, info: any) => {
+    try {
+        verifyToken(context)
+        return await fn(obj, args, context, info);
+    } catch (error) {
+        throw error
+    }
+}
 
 export const checkAccesLevel = async (context: any) => {
-    let authHeader = context.headers.authorization;
-    if (authHeader) {
-        try {
-            let decoded: any = jwt.verify(authHeader, SECRET)
-            const { accessLevel } = decoded
-            if (!accessLevel || accessLevel === 0) throw new GraphQLError("Access denied to this operation")
-            return true
-        } catch (error) {
-            throw error
-        }
+    try {
+        let decoded: any = verifyToken(context)
+        const { accessLevel } = decoded
+        if (!accessLevel || accessLevel === 0) throw new GraphQLError("Access denied to this operation")
+        return true
+    } catch (error) {
+        throw error
     }
-    throw new GraphQLError("Unauthorized : no access token supplied");
 };
 
 export function wrap(object: any, fn: any): any {
